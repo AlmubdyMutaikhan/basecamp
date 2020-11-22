@@ -3,10 +3,10 @@ const router = Router()
 const jwt = require('jsonwebtoken')
 const { User } = require('../models/User')
 const config = require('../config/db')
+const { token } = require('morgan')
 
-
-const createToken = (id) => {
-  return jwt.sign({ id }, config.secret, {
+const createToken = (id, is_admin) => {
+  return jwt.sign({ id, is_admin }, config.secret, {
       expiresIn: 60*60*60*24
   })
 }
@@ -33,6 +33,11 @@ const handleErrors = (err) => {
     });
   }
   return errors
+}
+
+const prepareUserData = (user) =>{
+  user["password"] = null
+  return user
 }
 
 router.get('/', (req, res) => {
@@ -75,13 +80,25 @@ router.get('/check-user/:token', (req, res) => {
     }
 })
 
+router.get('/all-users', async (req, res) => {
+  try {
+    const users = await User.find({}) // empty to retrieve all docs
+    res.status(200).json({users : users})
+  } catch(err) {
+    console.log(err.message)
+    res.status(400).json({err : err.message})
+  }
+})
+
 router.post('/signup', async (req, res) => {
   try {
     const user = await User.create(req.body)
-    const token = createToken(user._id)
+    const token = createToken(user._id, user.is_admin)
+    console.log(user)
     res.cookie('jwt', token, { httpOnly : true, maxAge : 60 * 60 * 60 * 24})
     res.status(201).json({msg : "succesfully, user has been created",
-                          token : token
+                          token : token,
+                          user : prepareUserData(user)
     })
   } catch(err) {
     const errors = handleErrors(err)
@@ -95,9 +112,10 @@ router.post('/signin', async (req, res, next) => {
   const password = req.body.password
   try {
       const user = await User.login({ email, password })
-      const token = createToken(user._id)
+      console.log(user)
+      const token = createToken(user._id, user.is_admin)
       res.cookie('jwt', token, { httpOnly : true, maxAge : 60 * 60*60})
-      res.status(201).json({user : user._id,
+      res.status(201).json({user : prepareUserData(user),
                             msg : "succesfully signed in",
                             token : token
       })
@@ -107,5 +125,42 @@ router.post('/signin', async (req, res, next) => {
   }
 })
 
+router.get('/get-token/:token', (req, res)=>{
+  jwt.verify(req.params.token, config.secret, (err, decodedToken) => {
+    console.log(decodedToken)
+  })
+})
+
+router.get('/update/:id/:isAdmin/:name/', async (req, res) => {
+  const id =  req.params.id
+  const isAdmin = req.params.isAdmin
+  const name = req.params.name
+
+  try {
+    const user = await User.findByIdAndUpdate({_id : id}, {
+      is_admin : isAdmin,
+      name : name, 
+    })
+    console.log(user)
+    res.status(201).json({ msg : "Succesfully updated" })
+
+  } catch(err) {
+    console.log(err.message)
+    res.status(400).json({msg : "Smth went wrong"})
+  }
+
+})
+
+router.delete('/delete/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    const usr = await User.deleteOne({ _id : id})
+    console.log(usr)
+    res.status(201).json({msg : "Succesfully removed"})
+  } catch(err) {
+    console.log(err.message)
+    res.status(400).json({msg : "Smth went wrong"})
+  }
+})
 
 module.exports = router
