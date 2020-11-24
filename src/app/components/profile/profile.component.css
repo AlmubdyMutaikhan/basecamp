@@ -1,0 +1,56 @@
+.profile {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profile h1 {
+    position: relative;
+    font-size: 35px;
+    margin-left: 50px;
+    white-space: normal;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+
+.profile-card .item {
+    margin-top: 2rem;
+    font-size: 17px;
+}
+
+.profile-card .item label {
+    margin-right: 50px;
+}
+
+button {
+    margin-top: 2rem;
+    height: 40px;
+    background-color: indianred;
+    color: white;
+    border: none;
+}
+
+.del {
+    margin-top: 50px;
+    display: block;
+    background: rgb(228, 7, 7);
+    width: 50%;
+    color: #eee;
+    padding: 5px 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.title {
+    margin-top: 50px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 70px;
+    text-shadow: aqua 1px 1px 5px;
+}

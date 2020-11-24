@@ -1,0 +1,18 @@
+div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div h1 {
+    color: aqua;
+}
+
+div h2 {
+    color: rgb(255, 233, 31);
+} 
+
+div a {
+    color: greenyellow;
+}

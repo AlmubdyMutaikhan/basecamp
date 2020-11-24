@@ -1,0 +1,89 @@
+.projects {
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    transform: translate(-50%, -50%);
+}
+
+.title {
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 70px;
+    text-shadow: aqua 1px 1px 5px;
+}
+
+.projects .addNew {
+    position: relative;
+}
+
+.projects .addNew label {
+    color: aqua;
+    font-size: 18px;
+    margin-right: 15px;
+}
+
+.projects .addNew button {
+    border: none;
+    margin-top: 15px;
+    width: 100%;
+    cursor: pointer;
+    background-color: rgb(71, 192, 77);
+    color: white;
+    font-size: 17px;
+    padding-top: 5px;
+}
+
+.projects .addNew input[type="text"] {
+    border: none;
+    outline: none;
+    background-color: black;
+    border-bottom: 1px solid rgb(255, 251, 0);
+    color: white;
+    font-size: 17px;
+    min-width: 100%;
+}
+
+.project-names {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    margin-top: 50px;
+    width: 70%;
+}
+
+.project-card {
+    border: 2px solid green;
+    margin-bottom: 25px;
+    padding: 10px 5px;
+}
+
+.project-card h3 {
+    font-size: 20px;
+    align-items: center;
+    color: white;
+    display: inline;
+}
+
+.project-card a {
+    color: aqua;
+    font-size: 20px;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.project-card a:hover {
+    color: red;
+}
+
+.project-card button {
+    float: right;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 25px;
+    background-color: rgb(115, 255, 87);
+}
+
+

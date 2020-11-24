@@ -1,0 +1,15 @@
+<div class="profile">
+    <h3 class="title">Welcome, {{ user["email"] }}</h3>
+    <div class="profile-card">
+        <div class="item name">
+            <label>Name: </label>
+            <input type="text" [(ngModel)]="user['name']" />
+        </div>
+        <div class="item intrests">   
+            <label>Intrests:</label>
+            <input type="text" value="any, yet" />
+        </div>
+        <button (click)="onSubmit()">Edit & Submit</button>
+        <p class="del" (click)="deleteUser()">Delete my account :(</p>
+    </div>
+</div>

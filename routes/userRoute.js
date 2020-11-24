@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken')
 const { User } = require('../models/User')
 const config = require('../config/db')
 const { token } = require('morgan')
+const  mongoose = require('mongoose')
+const Project = require('../models/Project')
 
 const createToken = (id, is_admin) => {
   return jwt.sign({ id, is_admin }, config.secret, {
@@ -39,21 +41,6 @@ const prepareUserData = (user) =>{
   user["password"] = null
   return user
 }
-
-router.get('/', (req, res) => {
-  res.redirect('/user/signup')
-}) 
-router.get('/signup', (req, res) => {
-    res.send('<h1>Sign up page</h1>')
-})
-
-router.get('/signin', (req, res) => {
-    res.send('<h1>Sign in page</h1>')
-})
-
-router.get('/profile', (req, res) => {
-  res.json({user : req.user }).send('<h1>My Profile</h1>')    
-})
 
 router.get('/check-user/:token', (req, res) => {
     const token = req.params.token
@@ -91,6 +78,29 @@ router.get('/all-users', async (req, res) => {
 })
 
 router.post('/signup', async (req, res) => {
+  /*
+  const user = new User({ 
+      _id : new mongoose.Schema.Types.ObjectId(),
+      email : req.body.email,
+      password : req.body.password,
+      is_admin : false,
+      is_user : true, 
+   })
+
+   user.save((err) => {
+     if(err) {
+       const errors = handleErrors(err)
+       res.status(400).json({errors : errors})
+     } else {
+       const project = new Project({
+         owner : user._id 
+       })
+       project.save(err => {
+          
+       })
+     }
+   })
+  */
   try {
     const user = await User.create(req.body)
     const token = createToken(user._id, user.is_admin)
@@ -162,5 +172,40 @@ router.delete('/delete/:id', async (req, res) => {
     res.status(400).json({msg : "Smth went wrong"})
   }
 })
+
+router.post('/projects/add/:id', async (req, res) => {
+  try {
+    const title = req.body.title
+    const user = await User.findById(req.params.id)
+    const project = new Project({
+        title : title  
+    })
+    project.owners.push(req.params.id)
+    user.projects.push(project._id)
+    user.save((err)=>{
+      if(!err) {
+        project.save()
+      }
+    })
+  } catch(err) {
+    console.log(err)
+  }
+})
+
+router.get('/projects/all/:id', async (req, res) => {
+  const id = req.params.id
+  User
+    .findOne({ _id : id})
+    .populate('projects')
+    .exec((err, doc) => {
+      if(err) {
+        const errors = handleErrors(err)
+        res.status(400).json( { errors : errors })
+      } else {
+        res.status(200).json({ projects : doc["projects"] })
+      }
+    })
+})
+
 
 module.exports = router

@@ -23,7 +23,11 @@ const UserSchema = new mongoose.Schema({
     is_admin : {
         type : Boolean,
         default : false
-    }
+    },
+    projects : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Project'
+    }]
 }) 
 
 UserSchema.pre('save', async function (next) {

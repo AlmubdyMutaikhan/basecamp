@@ -1,0 +1,33 @@
+<div>
+    <h1 class="title">Users of Basecamp</h1>
+    <div class="mycontainer">
+        <div *ngFor="let user of allUsers">
+            <div class="mycard">
+                <p class="index">{{ allUsers.indexOf(user)}} </p>
+                <a href="#">
+                {{ user.email }}
+                {{ getUserName() === user.email ? '(You)' : ''}}
+                </a>
+                <button *ngIf="is_admin() && getUserName() !== user.email"
+                        class="btn del"
+                        (click)="deleteUser(user._id, allUsers.indexOf(user))">
+                        Delete this user
+                </button>
+                <button *ngIf="is_admin() && getUserName() !== user.email && !user.is_admin"
+                        class="btn edit"
+                        (click)="updateUser(allUsers.indexOf(user), user._id, user.name, true)">
+                        Set as admin this user
+                </button>
+                <button *ngIf="is_admin() && getUserName() !== user.email && user.is_admin"
+                        class="btn edit"
+                        (click)="updateUser(allUsers.indexOf(user), user._id, user.name, false)">
+                        Remove status as admin
+                </button>
+                <p *ngIf="user.is_admin" class="status">Admin</p>
+                <p *ngIf="user.is_user && !user.is_admin" class="status">User</p>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

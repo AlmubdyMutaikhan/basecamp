@@ -1,0 +1,79 @@
+.mycontainer {
+    position: absolute;
+    left: 30%;
+    height: 500px;
+    width: 500px;
+    color: white;
+    top: 200px;
+}
+
+.title {
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(184, 56, 120);
+    display: block;
+    margin-bottom: 50px;
+    top: 150px;
+    left: 15%;
+}
+
+.mycontainer .mycard a{
+    display: block;
+    font-size: 26px;
+    margin-top: 20px;
+    top: 10px;
+    position: relative;
+    color: rgb(39, 170, 202);
+    text-decoration: none;
+    transition: 0.3s;
+    width: 85%;
+    padding: 15px 20px;
+    border-bottom: 1px solid greenyellow;
+}
+
+.mycontainer .mycard a:hover {
+    color: rgb(86, 197, 86);
+}
+
+.status {
+    display: block;
+    font-size: 20px;
+    float: right;
+    color: pink;
+}
+
+.index {
+    font-size: 25px;
+    position: relative;
+    top: 63px;
+    left: -15px;
+}
+
+.btn {
+    border: none;
+    font-size: 17px;
+    margin-top: 15px;
+    color: #eee;
+    padding: 5px 20px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    color: white;
+}
+
+.del {
+    border: 1px solid red;
+}
+.edit {
+    border: 1px solid aqua;
+}
+
+.del:hover {
+    background: rgb(141, 10, 10);
+} 
+
+.edit:hover {
+    background-color: rgb(8, 112, 112);
+}

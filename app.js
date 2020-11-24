@@ -1,9 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const bcrypt = require('bcrypt')
-const passport = require('passport')
-const passportJWT = require('passport-jwt')
 const bodyParser = require('body-parser')
 const userRoute = require('./routes/userRoute')
 const morgan = require('morgan')
@@ -15,6 +12,7 @@ const cookiParser = require('cookie-parser')
 app.use(morgan('dev'))
 app.use(cors()) // CORS middleware 
 app.use(bodyParser.json()) // body parser middleware
+
 // set PORT value
 const PORT = process.env.PORT || 3000
 // set user route
@@ -39,4 +37,5 @@ mongoose.connection.on('connected', () => {
         console.log("server is running on port ", PORT)
     })
 } )
+
 

@@ -1,0 +1,41 @@
+.title {
+    color: yellowgreen !important;
+    transition: 0.3s ease-out;
+}
+
+.login-form {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    padding: 50px;
+    display: inline-block;
+}
+
+label {
+    color: white;
+    font-size: 20px;
+}
+
+input {
+    outline: none !important;
+    font-size: 18px;
+    background: black !important;
+    color: green !important;
+    border-bottom: 1px solid green; 
+}
+
+button:hover {
+    color: black;
+    box-shadow: 0 0 10px rgba(141, 247, 4, 0.925);
+    background: yellowgreen !important;
+}
+
+button {
+    border: none;
+    background: green !important;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+}

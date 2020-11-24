@@ -1,0 +1,16 @@
+
+<div class="login-form">
+    <h1 class="title">Log in to see the magic again!</h1>
+    <form (submit)="onSubmit()">
+        <div class="form-group">
+            <label>Enter your email:</label>
+            <input type="email" [(ngModel)]="email" class="form-control" name="email"/>
+        </div>
+        <div class="form-group">
+            <label>Enter your password:</label>
+            <input type="password" [(ngModel)]="password" class="form-control" name="password"/>
+        </div>
+        <a class="title"routerLink="/signup">Don't have account? Create then</a>
+        <button classs="bg-green fancy-btn my-2 my-sm-0" type="submit">Log in</button>
+    </form>
+</div>

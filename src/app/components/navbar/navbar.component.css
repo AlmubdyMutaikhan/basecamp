@@ -1,0 +1,36 @@
+.navbar {
+    background-color: #262626 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 23px;
+}
+
+.navbar-nav {
+    font-size: 13px;
+}
+
+.green {
+    color: yellowgreen !important;
+    transition: 0.3s ease-out;
+}
+.green:hover {
+    color: red !important;
+    font-size: 15px;
+}
+
+.bg-green {
+    background: green !important;
+    color: black;
+}
+
+.bg-green:hover {
+    color: black;
+    box-shadow: 0 0 10px rgba(141, 247, 4, 0.925);
+    background: yellowgreen !important;
+}
+
+.fancy-btn {
+    border-radius: 5px;
+}
